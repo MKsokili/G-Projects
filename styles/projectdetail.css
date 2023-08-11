@@ -1,0 +1,58 @@
+#project-details-container{
+    margin-left: 20.5%;
+    margin-top: 10px;
+    border: 3px solid black;
+    width: inherit;
+    border-radius: 5px;
+    border: 1px solid rgba(29, 43, 58, .2);
+    padding: 1em;
+    background: white;
+}
+
+
+#project-details-container h3 {
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 36px;
+    font-weight: bolder ;
+    margin-bottom: 20px;
+    color: rgb(185, 56, 56); 
+}
+
+#project-details-container h4 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: rgb(61, 61, 139); 
+}
+
+#project-details-container p {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #555; 
+}
+
+#project-details-container ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+#project-details-container li {
+    margin-bottom: 8px;
+}
+
+#project-details-container a {
+    color: #47AB11; 
+    text-decoration: none;
+}
+
+#project-details-container a:hover {
+    text-decoration: underline;
+}
+
+#project-details-container p:last-child, #project-details-container ul {
+    margin-top: 25px;
+}

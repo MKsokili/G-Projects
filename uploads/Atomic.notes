@@ -1,0 +1,217 @@
+
+### Exercice d'XSLT 
+
+# fichier chimie01.xml (qlq elements chimique et leurs listes atomiques)
+[xml]
+<chimie>
+  <liste_corps>
+    <corps>
+      <nom>eau</nom>
+      <composant ref="H" nb="2"/>
+      <composant ref="O" nb="1"/>
+    </corps>
+    <corps>
+      <nom>sel</nom>
+      <composant ref="Na" nb="3"/>
+      <composant ref="Cl" nb="2"/>
+    </corps>
+    <corps>
+      <nom>carbon dioxide</nom>
+      <composant ref="C" nb="5"/>
+      <composant ref="O" nb="4"/>
+      <composant ref="O" nb="10"/>
+    </corps>
+  </liste_corps>
+
+  <liste_atomes>
+    <atome symbole="H">
+      <nom>hydrogen</nom>
+    </atome>
+    <atome symbole="O">
+      <nom>oxygen</nom>
+    </atome>
+    <atome symbole="Na">
+      <nom>sodium</nom>
+    </atome>
+    <atome symbole="Cl">
+      <nom>chlorine</nom>
+    </atome>
+    <atome symbole="C">
+      <nom>carbon</nom>
+    </atome>
+  </liste_atomes>
+</chimie>
+[xml]
+
+# 1st solution application sur chimie01.xsd
+[xml]
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html"/>
+  <xsl:template match="/">
+    <html>
+      <body>
+        <xsl:variable name="liste_corps" select="/chimie/liste_corps"/>
+        <xsl:variable name="liste_atomes" select="/chimie/liste_atomes"/>
+        <h2>Composition des Corps Chimiques</h2>
+        <ul>
+          <xsl:for-each select="$liste_corps/corps">
+            <li>
+              <xsl:value-of select="nom"/>: (
+              <xsl:for-each select="composant">
+                <xsl:variable name="ref" select="@ref"/>
+                    <a href="{./@ref}.html"> 
+                        <xsl:for-each select="$liste_atomes/atome">
+                        <xsl:if test="@symbole = $ref">
+                            <xsl:value-of select="nom"/>
+                        </xsl:if>
+                        </xsl:for-each>
+                    </a>
+              </xsl:for-each>
+              )
+            </li>
+          </xsl:for-each>
+        </ul>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+[xml]
+
+# 2nd solution application sur chimie01.xsd
+[xml]
+...
+<ul>
+    <xsl:template match="corps" mode="composition"> 
+        <xsl:for-each select="corps"> 
+            <li>
+                <b> <xsl:value-of select="./nom"/> : </b>
+                (
+                    <xsl:for-each select="composant">
+                        <xsl:variable name="s" select="./@ref"/> 
+                        <a href="{./@ref}.html"> 
+                            <xsl:value-of select="//atome[@symbole= $s]/nom"/>
+                        </a>
+                    </xsl:for-each>
+                )
+            </li>
+        </xsl:for-each> 
+    </xsl:template> 
+</ul>
+...
+[xml]
+
+# 2nd question Table:
+[xml]
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html"/>
+  <xsl:template match="/">
+    <html>
+      <body>
+        <xsl:variable name="liste_corps" select="/chimie/liste_corps"/>
+        <xsl:variable name="liste_atomes" select="/chimie/liste_atomes"/>
+        <h2>Formules Brutes</h2>
+            <table>
+                <tr>
+                    <th>Nom de Corps Chimique</th>
+                    <th>Formule Brute</th>
+                </tr>
+                <xsl:for-each select="$liste_corps/corps">
+                    <tr>
+                        <td><xsl:value-of select="nom"/></td>
+                        <td>
+                            <xsl:for-each select="composant">
+                                <xsl:value-of select="@ref"/>
+                                <xsl:if test="@nb>1">
+                                    <xsl:value-of select="@nb"/>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </td>
+                    </tr>
+                </for-each>
+            </table>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+[xml]
+
+# 1 + 2
+[xml]
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html"/>
+  <xsl:template match="/">
+    <html>
+      <body>
+        <xsl:variable name="liste_corps" select="/chimie/liste_corps"/>
+        <xsl:variable name="liste_atomes" select="/chimie/liste_atomes"/>
+        <h2>Composition des Corps Chimiques</h2>
+        <ul>
+          <xsl:for-each select="$liste_corps/corps">
+            <li>
+              <xsl:value-of select="nom"/>: (
+              <xsl:for-each select="composant">
+                <xsl:variable name="ref" select="@ref"/>
+                    <a href="{./@ref}.html"> 
+                        <xsl:for-each select="$liste_atomes/atome">
+                        <xsl:if test="@symbole = $ref">
+                            <xsl:value-of select="nom"/>
+                        </xsl:if>
+                        </xsl:for-each>
+                    </a>
+              </xsl:for-each>
+              )
+            </li>
+          </xsl:for-each>
+        </ul>
+                <h2>Formules Brutes</h2>
+            <table border="1" color="#000">
+                <tr>
+                    <th>Nom de Corps Chimique</th>
+                    <th>Formule Brute</th>
+                </tr>
+                <xsl:for-each select="$liste_corps/corps">
+                    <tr>
+                        <td><xsl:value-of select="nom"/></td>
+                        <td>
+                            <xsl:for-each select="composant">
+                                <xsl:value-of select="@ref"/>
+                                <xsl:if test="@nb>1">
+                                    <xsl:value-of select="@nb"/>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </td>
+                    </tr>
+                </for-each>
+            </table>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+[xml]
+
+# 3eme question concernant elementChimique.html
+
+[xml]
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html"/>
+  <xsl:template match="/">
+    <html>
+      <body>
+        <xsl:variable name="liste_atomes" select="/chimie/liste_atomes"/>
+        <!-- on peut utiliser la balise <xsl:result-documant/> avant -->
+            <xsl:for-each select="$liste_atomes/atome">
+                <h3><xsl:value-of select="nom"/></h3>
+                <ul>
+                    <li>Symbole: <xsl:value-of select="@symbole"/></li>
+                    <li>Couche: <xsl:value-of select="couche"/></li>
+                    <li>Peripherique: <xsl:value-of select="periph"/></li>
+                    <li>Masse: <xsl:value-of select="masse"/></li>
+                    <li>Famille: <xsl:value-of select="type"/></li>
+                </ul>
+            </xsl:for-each>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+[xml]
+

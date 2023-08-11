@@ -1,0 +1,43 @@
+%{
+int compt=1;
+%}
+
+Integer [0-9]+
+Real [0-9]+\.[0-9]+
+Ari_op [-+*/]
+Log_op "&&"|"||"|"!"
+Comp_op "<"|">"|"<="|">="|"=="|"!="
+Affect_op =
+String \"[a-zA-Z0-9_ ]*\"
+Ident [a-zA-Z]([a-zA-Z]|[0-9])*
+Comment "/*".*"*/"
+Type int|float|double|char
+KeyWord if|else|for|break|continue|while|return|printf
+Separator "("|")"|"{"|"}"|"["|"]"|";"
+%option
+%%
+
+{String} {printf("%d String		%s\n",compt,yytext);}
+{Integer} {printf("%d entier	%d\n",compt,yytext);}
+{Real} {printf("%d reel	%lf\n",compt,yytext);}
+{Separator} {printf("%d Sep		%s\n",compt,yytext);}
+{Ari_op} {printf("%d operator arithmetic 		%s\n",compt,yytext);}
+{Log_op} {printf("%d operator logique		%s\n",compt,yytext);}
+{Type} {printf("%d type		%s\n",compt,yytext);}
+{KeyWord} {printf("%d KeyWord		%s\n",compt,yytext);}
+{Ident} {printf("%d Identificateur 		%s\n",compt,yytext);}
+{Comp_op} {printf("%d operator comparaison		%s\n",compt,yytext);}
+{Affect_op} {printf("%d operator affectation		%s\n",compt,yytext);}
+{Comment} {printf("%d comment 		%s",compt,yytext);}
+\n {compt++;}
+
+
+%%
+int yywrap()
+{
+return 1;
+}
+int main()
+{
+yylex();
+}

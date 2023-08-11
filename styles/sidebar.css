@@ -1,0 +1,79 @@
+.sidebar{
+    position: fixed;
+    background-color: rgb(185, 56, 56);
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+    .profil{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        }
+        .profil-image{
+            width: 180px;
+            height: 180px;
+        }
+        .profil-image img{
+            width: 100% ;
+            height: 100%;
+            /* border-radius: 50%; */
+            object-fit:cover;
+            transition: transform 0.3s ease;
+        }
+
+    .loading{
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .profil h3{
+        margin-left: 15px;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s ease-out;
+        font-size: larger;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    }
+    .profil h3:hover{
+        color: rgb(61, 61, 139);
+        padding: 4px;
+    }
+ 
+    /* -------------------------------- */
+
+    .page-parties{
+        text-align: center;
+    }
+    .page-parties ul{
+        margin-right: 25px;
+        margin-left: auto;
+    }
+    .page-parties li{
+        list-style-type: none;
+        margin-bottom: 30px;
+    }
+    .page-parties li a:hover{
+        color: rgb(61, 61, 139);
+        margin-left: 15px;
+    }
+    .page-parties li a{
+        text-decoration: none;
+        transition: 0.3s ease-out;
+        color: white;
+        font-size: large;
+        transition: 0.4s;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    .page-parties li a i{
+        margin-right: 7px;
+
+    }
