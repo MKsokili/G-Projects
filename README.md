@@ -10,7 +10,7 @@ G-Projects is a project management application that allows users to effectively 
 - Collaboration: Users can collaborate within projects by sharing updates, comments, and files.
 - Task Tracking: Users can create and track tasks within projects to manage project progress.
 
-  <img src="./img/G-projectsviewpag.png" width="250" height="200px" alt="accessibility text">
+  <img src="./img/G-projectsviewpag.png" width="500" height="250px" alt="accessibility text">
 
 ## Technologies Used
 
